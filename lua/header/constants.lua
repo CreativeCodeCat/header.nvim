@@ -19,12 +19,14 @@ values.margin = 5
 --- Makes constants read-only by using lua `setmetatable`
 -- @param tbl Table with all contants values
 local set_constants = function(tbl)
-	return setmetatable({}, {
-		__index = tbl,
-		__newindex = function(_, _, _)
-			error("[header] Attempting to change constant value.")
-		end,
-	})
+    return setmetatable(
+               {}, {
+            __index = tbl,
+            __newindex = function(_, _, _)
+                error("[header] Attempting to change constant value.")
+            end,
+        }
+           )
 end
 
 local constants = set_constants(values)

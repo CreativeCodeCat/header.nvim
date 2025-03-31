@@ -9,7 +9,7 @@ Additionally, it also automatically updates the last edited time.
 Just install using your package manager of choice:
 
 ```lua
-use 'The-Repo-Club/header.nvim'
+use 'CreativeCodeCat/header.nvim'
 ```
 
 ## Setup

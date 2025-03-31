@@ -9,7 +9,8 @@ local bo = vim.bo
 --- Formats the header for insertion
 local function format_header(ft_config)
     local filename = fn.expand("%:t")
-    local dir = debug.getinfo(1).source:sub(2):match("(.*/)")
+    local file = vim.api.nvim_buf_get_name(0)
+    local dir = vim.fn.fnamemodify(file, ":h")
     local username = ft_config.username or config.username
     local email = ft_config.email or config.email
     local git = ft_config.git or config.git
@@ -74,7 +75,8 @@ header.update = function(ft_config)
                   )
     if found then
         local filename = fn.expand("%:t")
-        local dir = os.getenv("PWD") or io.popen("cd"):read()
+        local file = vim.api.nvim_buf_get_name(0)
+        local dir = vim.fn.fnamemodify(file, ":h")
         local SPACES_AFTER_FILENAME =
             constants.length - (2 * constants.margin) - string.len(filename) -
                 string.len(dir) - 19

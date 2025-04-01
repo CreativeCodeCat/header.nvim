@@ -11,6 +11,9 @@ local function format_header(ft_config)
     local filename = fn.expand("%:t")
     local file = vim.api.nvim_buf_get_name(0)
     local dir = vim.fn.fnamemodify(file, ":h")
+    -- Convert absolute path to ~ if it's inside the home directory
+    dir = dir:gsub("^" .. vim.fn.expand("~"), "~")
+
     local username = ft_config.username or config.username
     local email = ft_config.email or config.email
     local git = ft_config.git or config.git
@@ -77,6 +80,9 @@ header.update = function(ft_config)
         local filename = fn.expand("%:t")
         local file = vim.api.nvim_buf_get_name(0)
         local dir = vim.fn.fnamemodify(file, ":h")
+        -- Convert absolute path to ~ if it's inside the home directory
+        dir = dir:gsub("^" .. vim.fn.expand("~"), "~")
+
         local SPACES_AFTER_FILENAME =
             constants.length - (2 * constants.margin) - string.len(filename) -
                 string.len(dir) - 19
